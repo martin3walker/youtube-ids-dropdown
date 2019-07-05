@@ -1,0 +1,8 @@
+{
+  "id": "youtube-dropdown",
+  "name": "youtube-dropdown",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Object"
+  ]
+}
