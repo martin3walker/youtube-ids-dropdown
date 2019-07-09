@@ -8,6 +8,7 @@ import './index.css';
 import dotenv from 'dotenv';
 
 dotenv.config();
+console.log(`Playlist ID: ${process.env.PLAYLIST_ID}`);
 
 class App extends React.Component {
   static propTypes = {
@@ -49,6 +50,7 @@ class App extends React.Component {
     };
 
     const getVideos = async (idCount = 0, videos = []) => {
+      console.log('getting videos');
       const playlistResponse = await getPlaylist();
       let videoIds = await playlistResponse.map(
         vid => vid.snippet.resourceId.videoId
@@ -94,6 +96,7 @@ class App extends React.Component {
     let videos = this.state.videos;
     this.props.sdk.field.setValue(this.state.value);
     console.log(`field-value: ${this.props.sdk.field.getValue()}`);
+    console.log(this.state.videos);
 
     return (
       <React.Fragment>
