@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
@@ -5,9 +7,7 @@ import { SelectField, Paragraph } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
-import dotenv from 'dotenv';
 
-dotenv.config();
 console.log(`Playlist ID: ${process.env.PLAYLIST_ID}`);
 
 class App extends React.Component {
