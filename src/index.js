@@ -115,7 +115,9 @@ class App extends React.Component {
             ))}
           </SelectField>
         ) : (
-          <Paragraph className={'f36-font-size--m'}>Fetching Videos</Paragraph>
+          <Paragraph className={'f36-font-size--m, fetching'}>
+            Fetching Videos
+          </Paragraph>
         )}
       </React.Fragment>
     );

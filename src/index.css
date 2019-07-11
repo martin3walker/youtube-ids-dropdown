@@ -8,3 +8,19 @@ div {
   font: inherit;
   vertical-align: baseline;
 }
+
+@keyframes fetching {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fetching {
+  animation-duration: 1.2s;
+  animation-name: fetching;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
