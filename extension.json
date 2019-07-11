@@ -2,7 +2,23 @@
   "id": "youtube-dropdown",
   "name": "youtube-dropdown",
   "srcdoc": "./build/index.html",
-  "fieldTypes": [
-    "Object"
-  ]
+  "fieldTypes": ["Object"],
+  "parameters": {
+    "instance": [
+      {
+        "id": "youtubeApiKey",
+        "type": "Symbol",
+        "required": true,
+        "name": "Youtube API Key",
+        "description": "Youtube API Key enabled in the Google Developers Console"
+      },
+      {
+        "id": "youtubePlaylistId",
+        "type": "Symbol",
+        "required": true,
+        "name": "Youtube Playlist ID",
+        "description": "The ID of the playlist that contains the videos you'd like to make accesible to your editors"
+      }
+    ]
+  }
 }

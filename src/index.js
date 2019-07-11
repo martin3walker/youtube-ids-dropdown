@@ -8,8 +8,6 @@ import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
 
-console.log(`Playlist ID: ${process.env.PLAYLIST_ID}`);
-
 class App extends React.Component {
   static propTypes = {
     sdk: PropTypes.object.isRequired
@@ -29,13 +27,18 @@ class App extends React.Component {
   componentDidMount() {
     this.props.sdk.window.startAutoResizer();
 
+    console.log(
+      this.props.sdk,
+      `instance variables: ${this.props.sdk.parameters.instance}`
+    );
+
     // Fetch youtube data
     const getPlaylist = async (nextPage, videos = []) => {
       let url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${
-        process.env.API_KEY
-      }&playlistId=${process.env.PLAYLIST_ID}&part=snippet${
-        nextPage ? `&pageToken=${nextPage}` : ''
-      }`;
+        this.props.sdk.parameters.instance.youtubeApiKey
+      }&playlistId=${
+        this.props.sdk.parameters.instance.youtubePlaylistId
+      }&part=snippet${nextPage ? `&pageToken=${nextPage}` : ''}`;
       let response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -50,7 +53,6 @@ class App extends React.Component {
     };
 
     const getVideos = async (idCount = 0, videos = []) => {
-      console.log('getting videos');
       const playlistResponse = await getPlaylist();
       let videoIds = await playlistResponse.map(
         vid => vid.snippet.resourceId.videoId
@@ -59,7 +61,9 @@ class App extends React.Component {
       let url = `https://www.googleapis.com/youtube/v3/videos?id=${videoIds.slice(
         `${idCount != 0 ? idCount - 1 : idCount}`,
         idCount + 50
-      )}&key=${process.env.API_KEY}&part=snippet,contentDetails`;
+      )}&key=${
+        this.props.sdk.parameters.instance.youtubeApiKey
+      }&part=snippet,contentDetails`;
 
       let response = await fetch(url, {
         method: 'GET',
@@ -95,8 +99,6 @@ class App extends React.Component {
   render() {
     let videos = this.state.videos;
     this.props.sdk.field.setValue(this.state.value);
-    console.log(`field-value: ${this.props.sdk.field.getValue()}`);
-    console.log(this.state.videos);
 
     return (
       <React.Fragment>
